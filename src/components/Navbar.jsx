@@ -16,7 +16,7 @@ const Navbar = ({ toggleTheme, theme }) => {
     const linkTextColor = theme === "light" ? "text-balck" : "text-white";
 
     return (
-        <nav className={`relative  border-b-2 border-gray-600 ${dropdownBackgroundColor}`}>
+        <nav className={`relative z-10  border-b-2 border-gray-600 ${dropdownBackgroundColor}`}>
             <div className="container mx-auto flex justify-between items-center p-4">
                 <div className="text-2xl font-bold capitalize">rent a car</div>
 

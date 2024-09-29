@@ -8,6 +8,9 @@ import Login from './pages/Login';
 import Cars from './pages/Cars';
 import Rents from './pages/Rents';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   const [theme, setTheme] = useState('light');
 
@@ -18,6 +21,7 @@ const App = () => {
 
   return (
     <Router>
+      <ToastContainer position="top-right" theme="colored" />
       <div className={theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white min-h-screen'}>
         <Navbar toggleTheme={toggleTheme} theme={theme} />
 
