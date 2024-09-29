@@ -20,14 +20,14 @@ const App = () => {
     <Router>
       <div className={theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white min-h-screen'}>
         <Navbar toggleTheme={toggleTheme} theme={theme} />
-        <main className="p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cars" element={<Cars />} />
-            <Route path="/rents" element={<Rents />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cars" element={<Cars />} />
+          <Route path="/rents" element={<Rents />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+
       </div>
     </Router>
   );
