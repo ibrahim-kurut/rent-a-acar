@@ -1,0 +1,60 @@
+{
+  "cars": [
+    {
+      "id": 1,
+      "name": "Toyota Camry",
+      "model": "2023",
+      "image": "https://scene7.toyota.eu/is/image/toyotaeurope/Camry-2_1920x1080:Medium-Landscape?ts=0&resMode=sharp2&op_usm=1.75,0.3,2,0",
+      "price_per_day": 100
+    },
+    {
+      "id": 2,
+      "name": "Honda Civic",
+      "model": "2022",
+      "image": "https://cdn.motor1.com/images/mgl/ZobwZ/s1/next-gen-honda-civic-type-renderings.webp",
+      "price_per_day": 90
+    },
+    {
+      "id": 3,
+      "name": "BMW X5",
+      "model": "2024",
+      "image": "https://cdn.dicklovett.co.uk/uploads/new_vehicle/4_174_f.jpg?v=1710319489",
+      "price_per_day": 150
+    },
+    {
+      "id": 4,
+      "name": "Audi",
+      "model": "2023",
+      "image": "https://cdn-bnext.borusanotomotiv.com/media/WAUZZZ8V9HA121517/253530_027b204b-20cd-412a-8678-bea018efbefe.jpg",
+      "price_per_day": 140
+    },
+    {
+      "id": 5,
+      "name": "passat",
+      "model": "2022",
+      "image": "https://www.otomobilhaber.com.tr/wp-content/uploads/2020/11/volkswagen-passat-1.jpg",
+      "price_per_day": 90
+    },
+    {
+      "id": 6,
+      "name": "hunday",
+      "model": "2024",
+      "image": "https://www.auto-infos.fr/mediatheque/9/9/3/000189399_600x400_c.jpg",
+      "price_per_day": 150
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "123-456-7890"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "phone": "098-765-4321"
+    }
+  ]
+}
