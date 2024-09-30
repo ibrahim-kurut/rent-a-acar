@@ -10,6 +10,7 @@ import Rents from './pages/Rents';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CarDetails from './pages/CarDetails';
 
 const App = () => {
   const [theme, setTheme] = useState('light');
@@ -30,6 +31,8 @@ const App = () => {
           <Route path="/cars" element={<Cars />} />
           <Route path="/rents" element={<Rents />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/car_details/:id" element={<CarDetails />} />
+
         </Routes>
 
       </div>

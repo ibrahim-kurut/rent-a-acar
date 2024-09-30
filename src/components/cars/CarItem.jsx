@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const CarItem = ({ data }) => {
     return (
@@ -16,7 +17,7 @@ const CarItem = ({ data }) => {
                             </div>
                             <div className="btns flex justify-between my-3">
                                 <button className="bg-blue-600 text-white px-2 capitalize rounded hover:bg-blue-700">Rent Car</button>
-                                <button className="bg-green-600 text-white px-2 capitalize rounded hover:bg-green-700">Details</button>
+                                <Link to={`/car_details/${item.id}`} className="bg-green-600 text-white px-2 capitalize rounded hover:bg-green-700">Details</Link>
                             </div>
                         </div>
                     )
