@@ -16,7 +16,7 @@ const CarItem = ({ data }) => {
                                 <p className="text-white">Price per day: {item.price_per_day}</p>
                             </div>
                             <div className="btns flex justify-between my-3">
-                                <button className="bg-blue-600 text-white px-2 capitalize rounded hover:bg-blue-700">Rent Car</button>
+                                <Link to={`/rent-car/${item.id}`} className="bg-blue-600 text-white px-2 capitalize rounded hover:bg-blue-700">Rent Car</Link>
                                 <Link to={`/car_details/${item.id}`} className="bg-green-600 text-white px-2 capitalize rounded hover:bg-green-700">Details</Link>
                             </div>
                         </div>
