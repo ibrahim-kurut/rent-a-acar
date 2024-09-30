@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { FaCar } from "react-icons/fa";
 import { GiGearStickPattern } from "react-icons/gi";
 import { AiFillDashboard } from "react-icons/ai";
@@ -10,59 +10,59 @@ import { MdOutlineMonitor } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { GrFormPreviousLink } from "react-icons/gr";
 
-
 const DetailsCar = ({ car }) => {
 
     return (
-        <div className="flex gap-3 mt-5">
-            <div className="img w-1/4">
+        <div className="details-car flex flex-col p-5 gap-3 md:flex-row md:gap-10 mt-5">
+            <div className="img w-full md:w-1/2">
                 <img className="rounded" src={car.image} alt={car.name} />
             </div>
-            <div className="details w-[60%] capitalize">
-                <h2 className="text-2xl font-semibold">name : {car.name}</h2>
-                <h4 className="text-xl font-semibold">price per day : {car.price_per_day} $</h4>
+            <div className="details w-full md:w-1/2 capitalize">
+                <h2 className="text-2xl font-semibold">name: {car.name}</h2>
+                <h4 className="text-xl font-semibold my-2">price per day: {car.price_per_day} $</h4>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta veritatis possimus, aliquam, tempore iste nemo in nisi sunt debitis unde explicabo, quod quisquam placeat necessitatibus.
                 </p>
-                <div className="mt-5 flex justify-around">
-                    <div>
-                        <p className="flex items-center gap-2">
+                <div className="mt-5 flex flex-wrap justify-around">
+                    <div className="flex-col">
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><FaCar /></span>
-                            <span>Model : {car.model}</span>
-                        </p>
-                        <p className="flex items-center gap-2">
+                            <span>Model: {car.model}</span>
+                        </div>
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><GiGearStickPattern /></span>
-                            <span>Gears : {car.gear}</span>
-                        </p>
-                        <p className="flex items-center gap-2">
+                            <span>Gears: {car.gear}</span>
+                        </div>
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><AiFillDashboard /></span>
-                            <span>kilometer : {car.kilometer}</span>
-                        </p>
-                        <p className="flex items-center gap-2">
+                            <span>kilometer: {car.kilometer}</span>
+                        </div>
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><SiYamahamotorcorporation /></span>
-                            <span>motor : {car.motor}</span>
-                        </p>
+                            <span>motor: {car.motor}</span>
+                        </div>
                     </div>
-                    <div>
-                        <p className="flex items-center gap-2">
+                    {/* ================ */}
+                    <div className="flex-col">
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><IoMdEye /></span>
                             <span>GPS Navigation</span>
-                        </p>
-                        <p className="flex items-center gap-2">
+                        </div>
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><FaLock /></span>
                             <span>Anti-Lock Breaks</span>
-                        </p>
-                        <p className="flex items-center gap-2">
+                        </div>
+                        <div className="detail-item flex items-center gap-2 mb-3 md:mb-0">
                             <span className="text-red-500"><FaKey /></span>
                             <span>Remote Keyless</span>
-                        </p>
-                        <p className="flex items-center gap-2">
+                        </div>
+                        <div className="detail-item flex items-center gap-2">
                             <span className="text-red-500"><MdOutlineMonitor /></span>
-                            <span>Rear - Seat DVD</span>
-                        </p>
+                            <span>Rear-Seat DVD</span>
+                        </div>
                     </div>
                 </div>
-                <div className="mt-5 w-fit">
+                <div className="m-5 w-fit">
                     <Link to="/cars" className="flex items-center animate-pulse">
                         <span><GrFormPreviousLink size={30} /></span>
                         <span> Back to Cars</span>
@@ -70,7 +70,7 @@ const DetailsCar = ({ car }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default DetailsCar
+export default DetailsCar;
