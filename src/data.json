@@ -8,7 +8,8 @@
       "price_per_day": 100,
       "gear": "manual",
       "kilometer": 12548,
-      "motor": "v-4 cylinder"
+      "motor": "v-4 cylinder",
+      "plate_no": "32 ks 2354"
     },
     {
       "id": 2,
@@ -18,7 +19,8 @@
       "price_per_day": 90,
       "gear": "automatic",
       "kilometer": 5465,
-      "motor": "v-4 cylinder"
+      "motor": "v-4 cylinder",
+      "plate_no": "26 as 240"
     },
     {
       "id": 3,
@@ -28,7 +30,8 @@
       "price_per_day": 150,
       "gear": "manual",
       "kilometer": 56147,
-      "motor": "v-4 cylinder"
+      "motor": "v-4 cylinder",
+      "plate_no": "06 yd 487"
     },
     {
       "id": 4,
@@ -38,7 +41,8 @@
       "price_per_day": 140,
       "gear": "automatic",
       "kilometer": 45732,
-      "motor": "v-6 cylinder"
+      "motor": "v-6 cylinder",
+      "plate_no": "76 hd 4187"
     },
     {
       "id": 5,
@@ -48,7 +52,8 @@
       "price_per_day": 90,
       "gear": "manual",
       "kilometer": 1254,
-      "motor": "v-6 cylinder"
+      "motor": "v-6 cylinder",
+      "plate_no": "16 ae 464"
     },
     {
       "id": 6,
@@ -58,7 +63,8 @@
       "price_per_day": 150,
       "gear": "automatic",
       "kilometer": 23456,
-      "motor": "v-6 cylinder"
+      "motor": "v-6 cylinder",
+      "plate_no": "62 ha 487"
     }
   ],
   "users": [

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function BookingForm({ car }) {
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -9,6 +11,8 @@ function BookingForm({ car }) {
         startDate: '',
         endDate: '',
     });
+
+    const navigate = useNavigate()
 
     const [totalDays, setTotalDays] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -63,6 +67,7 @@ function BookingForm({ car }) {
 
         // Send data to server
         toast.success("reserve successfully")
+        navigate(`/rents/${car.id}`)
 
     };
 
