@@ -13,6 +13,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import CarDetails from './pages/CarDetails';
 import RentCar from './pages/RentCar';
 
+import { Provider } from 'react-redux';
+import store from './redux/store';
+import Register from './pages/Register';
+
 const App = () => {
   const [theme, setTheme] = useState('light');
 
@@ -22,23 +26,26 @@ const App = () => {
 
 
   return (
-    <Router>
-      <ToastContainer position="top-right" theme="colored" />
-      <div className={theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white min-h-screen'}>
-        <Navbar toggleTheme={toggleTheme} theme={theme} />
+    <Provider store={store}>
+      <Router>
+        <ToastContainer position="top-right" theme="colored" />
+        <div className={theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white min-h-screen'}>
+          <Navbar toggleTheme={toggleTheme} theme={theme} />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cars" element={<Cars />} />
-          <Route path="/rents/:id" element={<Rents />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/car_details/:id" element={<CarDetails />} />
-          <Route path="/rent-car/:id" element={<RentCar />} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cars" element={<Cars />} />
+            <Route path="/rents/:id" element={<Rents />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/car_details/:id" element={<CarDetails />} />
+            <Route path="/rent-car/:id" element={<RentCar />} />
 
-        </Routes>
+          </Routes>
 
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </Provider>
   );
 };
 

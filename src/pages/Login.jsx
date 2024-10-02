@@ -17,7 +17,6 @@ const Login = () => {
         }
 
     };
-
     return (
         <div className="flex items-center justify-center mt-16">
             <div className="w-full max-w-md p-8 space-y-6 bg-gray-200 shadow-md rounded-lg">
@@ -57,9 +56,9 @@ const Login = () => {
                         </button>
                     </div>
                 </form>
-                <p>If you do not have an account,
+                <p className="text-black">If you do not have an account,
                     <Link
-                        className="capitalize font-bold"
+                        className="capitalize font-bold "
                         to="/register"> register now.</Link>
                 </p>
             </div>
