@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import { FaSun, FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
+import { useSelector } from 'react-redux';
 
 const Navbar = ({ toggleTheme, theme }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+    const { user } = useSelector((state) => state.user);
+
+    console.log("user from navbar ", user);
+
+
+
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -34,7 +43,26 @@ const Navbar = ({ toggleTheme, theme }) => {
                     <div className={`space-y-2 p-4 md:space-y-0 md:space-x-4 md:flex md:items-center ${dropdownBackgroundColor}`}>
                         <Link onClick={() => setIsMenuOpen(false)} to="/" className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>home</Link>
                         <Link onClick={() => setIsMenuOpen(false)} to="/cars" className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>cars</Link>
-                        <Link onClick={() => setIsMenuOpen(false)} to="/login" className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>login</Link>
+
+
+                        {
+                            user ?
+
+                                (<>
+                                    <p onClick={() => setIsMenuOpen(false)} className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto cursor-pointer`}>logout</p>
+                                </>)
+
+                                :
+                                (<>
+                                    <Link onClick={() => setIsMenuOpen(false)} to="/login" className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>login</Link>
+                                </>)
+
+
+
+                        }
+
+
+
                         <button onClick={toggleTheme} className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>
                             {theme === "light" ? <FaMoon /> : <FaSun />}
                         </button>

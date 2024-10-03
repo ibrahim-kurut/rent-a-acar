@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../redux/Slices/userSlice';
+import LoaderSpinner from '../components/LoaderSpinner';
+
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { status } = useSelector((state) => state.user);
+
 
     const handleSubmit = (e) => {
         const formDatad = { email, password }
@@ -13,7 +24,16 @@ const Login = () => {
         if (email.trim() === '' || password.trim() === '') {
             toast.error('Please fill in all fields');
         } else {
-            console.log(formDatad);
+            // send data to server
+            dispatch(login(formDatad))
+                .unwrap()
+                .then(() => {
+                    toast.success("Login successful")
+                    navigate('/')
+                })
+                .catch((error) => {
+                    toast.error(`Login failed: ${error}`);
+                });
         }
 
     };
@@ -52,7 +72,7 @@ const Login = () => {
                             type="submit"
                             className="w-full px-4 py-2 font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Login
+                            {status === 'loading' ? <LoaderSpinner /> : "Login"}
                         </button>
                     </div>
                 </form>
@@ -62,6 +82,7 @@ const Login = () => {
                         to="/register"> register now.</Link>
                 </p>
             </div>
+
         </div>
     );
 };

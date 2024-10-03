@@ -14,10 +14,36 @@ export const register = createAsyncThunk('user/register', async (userData, { rej
 })
 
 
+// Login process 
+export const login = createAsyncThunk('user/login', async (userData, { rejectWithValue }) => {
+    try {
+        const { email, password } = userData
+        const res = await axios.get('http://localhost:5000/users')
+        const users = res.data
+
+
+
+        // Find the user that matches the email and password
+        const user = users.find(user => user.email === email && user.password === password)
+
+        if (!user) {
+            throw new Error("Invalid email or password")
+        }
+        // Save userinfo to local Storage after login
+        localStorage.setItem("userInfo", JSON.stringify(user));
+
+        return user
+
+    } catch (error) {
+        return rejectWithValue(error.message);
+    }
+})
+
 //  initialize user
 const initialState = {
-    user: null,
-    isLoggedIn: false,
+    // If the user info is in Local Storage, get it, or it return null
+    user: localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null,
+    isLoggedIn: localStorage.getItem("userInfo") ? true : false,
     status: 'idle',
     error: null,
 };
@@ -39,6 +65,21 @@ const userSlice = createSlice({
                 state.error = null
             })
             .addCase(register.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.payload
+            })
+
+            // ============== login ==============
+            .addCase(login.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.isLoggedIn = true;
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(login.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.payload
             })
