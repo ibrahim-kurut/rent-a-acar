@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { FaSun, FaMoon } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { logout } from '../redux/Slices/userSlice';
 
 const Navbar = ({ toggleTheme, theme }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,7 +13,13 @@ const Navbar = ({ toggleTheme, theme }) => {
 
     const { user } = useSelector((state) => state.user);
 
-    console.log("user from navbar ", user);
+    const dispatch = useDispatch();
+
+    // handle logout
+    const handleLogout = () => {
+        dispatch(logout());
+        setIsMenuOpen(false)
+    };
 
 
 
@@ -49,7 +57,7 @@ const Navbar = ({ toggleTheme, theme }) => {
                             user ?
 
                                 (<>
-                                    <p onClick={() => setIsMenuOpen(false)} className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto cursor-pointer`}>logout</p>
+                                    <p onClick={handleLogout} className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto cursor-pointer`}>logout</p>
                                 </>)
 
                                 :
