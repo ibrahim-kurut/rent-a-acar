@@ -68,7 +68,7 @@ const Navbar = ({ toggleTheme, theme }) => {
 
 
                         }
-
+                        <Link onClick={() => setIsMenuOpen(false)} to="/admin" className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>admin</Link>
 
 
                         <button onClick={toggleTheme} className={`block ${linkTextColor} hover:text-gray-500 font-semibold container mx-auto`}>

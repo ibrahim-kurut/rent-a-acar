@@ -16,6 +16,7 @@ import RentCar from './pages/RentCar';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Register from './pages/Register';
+import AdminPage from './pages/AdminPage';
 
 const App = () => {
   const [theme, setTheme] = useState('light');
@@ -38,6 +39,7 @@ const App = () => {
             <Route path="/rents/:id" element={<Rents />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/car_details/:id" element={<CarDetails />} />
             <Route path="/rent-car/:id" element={<RentCar />} />
 
