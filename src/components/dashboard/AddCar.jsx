@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { createNewCar } from '../../redux/Slices/carSlice';
+import LoaderSpinner from '../LoaderSpinner';
+import { useNavigate } from 'react-router-dom';
 
 const AddCar = () => {
-
+    const { status } = useSelector((state) => state.cars);
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [carData, setCarData] = useState({
         "name": "",
         "model": "",
@@ -56,13 +62,20 @@ const AddCar = () => {
         return Object.keys(tempErrors).length === 0;
     };
 
-    // Function to handle form submission
+    // Function to submit the form
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
             try {
-                console.log(carData);
-                toast.success("data sent successfully");
+                const result = await dispatch(createNewCar(carData)).unwrap()
+
+
+
+
+                if (result) {
+                    toast.success("Data sent successfully");
+                    navigate('/cars');
+                }
 
 
                 setCarData({
@@ -75,19 +88,18 @@ const AddCar = () => {
                     motor: "v-4 cylinder",
                     plate_no: "",
                 });
-
-                document.querySelector('input[type="file"]').value = "";
             } catch (error) {
-                console.error('Error sending data:', error);
+                toast.error(`Data sending error: ${error.message}`);
             }
         }
     };
 
+    // Function to process input files (images)
     const handleFileChange = (e) => {
         const file = e.target.files[0]; // Get the first selected file
         setCarData(prevData => ({
             ...prevData,
-            image: file // Store the file in the state, not the path.
+            image: file
         }));
     };
 
@@ -97,7 +109,7 @@ const AddCar = () => {
         <div>
             <h2 className="text-2xl font-bold mb-4">Add Car</h2>
 
-            <form className="" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div className="btns flex justify-around gap-3">
                     <div className="w-[50%]">
                         <label className="block mb-2">Car Name</label>
@@ -124,7 +136,7 @@ const AddCar = () => {
                         <input
                             type="file"
                             name="image"
-                            onChange={(e) => handleFileChange(e)}
+                            onChange={handleFileChange}
                             className="mb-2 w-full border border-gray-500 rounded py-1 px-2"
                         />
                         {errors.image && <p className="text-red-500">{errors.image}</p>}
@@ -187,11 +199,13 @@ const AddCar = () => {
                 </div>
 
                 <div className="mt-10 flex justify-center">
-                    <button type="submit" className="bg-gray-400 hover:bg-gray-600 hover:text-gray-300 py-2 px-5 rounded">Add Car</button>
+                    <button type="submit" className="bg-gray-400 hover:bg-gray-600 hover:text-gray-300 py-2 px-5 rounded">
+                        {status === "loading" ? <LoaderSpinner /> : "Add Car"}
+                    </button>
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
 export default AddCar;
