@@ -76,10 +76,7 @@ const Dashboard = () => {
                 )}
 
                 {!selectedSection && (
-                    <div>
-                        <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-                        <p>Select an option from the left to view its details.</p>
-                    </div>
+                    <MyCars />
                 )}
             </div>
         </div>

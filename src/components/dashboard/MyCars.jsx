@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCars } from '../../redux/Slices/carSlice'
-
+import { getAllCars, deleteCar } from '../../redux/Slices/carSlice'
+import { toast } from 'react-toastify'
+import swal from 'sweetalert';
 const MyCars = () => {
     const dispatch = useDispatch()
     const { cars, error } = useSelector(state => state.cars)
@@ -21,6 +22,33 @@ const MyCars = () => {
             </div>
         )
     }
+
+    // delete car handle
+    const handleDelete = async (id) => {
+
+        const isOk = await swal({
+            title: "Are you sure?",
+            text: "you want to delete the car?!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        });
+
+        if (isOk) {
+            try {
+                //delete only after user confirmation
+                await dispatch(deleteCar(id)).unwrap();
+                swal("Deleted!", "The car has been deleted.", "success");
+            } catch (error) {
+                toast.error(`Failed to delete car: ${error.message}`);
+            }
+        } else {
+            // If the user cancels the delete process
+            swal("Cancelled", "The car is safe.");
+        }
+    };
+
+
 
     return (
         <div>
@@ -46,7 +74,9 @@ const MyCars = () => {
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.plate_no}</td>
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">
                                     <button className="bg-green-600 text-white rounded capitalize px-2 py-1 mr-2 text-xs sm:text-sm w-full md:w-fit">Edit</button>
-                                    <button className="bg-red-600 text-white rounded capitalize px-2 py-1 text-xs sm:text-sm">Delete</button>
+                                    <button
+                                        onClick={() => handleDelete(car.id)}
+                                        className="bg-red-600 text-white rounded capitalize px-2 py-1 text-xs sm:text-sm">Delete</button>
                                 </td>
                             </tr>
                         ))}

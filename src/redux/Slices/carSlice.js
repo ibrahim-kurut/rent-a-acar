@@ -23,6 +23,17 @@ export const getAllCars = createAsyncThunk('cars/getAllCars', async () => {
     }
 })
 
+// delete car by id
+export const deleteCar = createAsyncThunk('cars/deleteCar', async (carId) => {
+    try {
+        const res = await axios.delete(`http://localhost:5000/cars/${carId}`)
+        return res.data;
+    } catch (error) {
+        console.error('Failed to delete car:', error);
+        throw error;
+    }
+})
+
 const carSlice = createSlice({
     name: 'cars',
     initialState: {
@@ -60,6 +71,19 @@ const carSlice = createSlice({
                 state.error = action.error.message;
 
             })
+            // delete car
+            .addCase(deleteCar.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(deleteCar.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.cars = state.cars.filter(car => car.id !== action.payload);
+            })
+            .addCase(deleteCar.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+
     }
 });
 
