@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import AddCar from './AddCar';
 import Users from './Users';
 import RentedCar from './RentedCar';
+import MyCars from './MyCars';
 
 const Dashboard = () => {
     const [selectedSection, setSelectedSection] = useState('');
@@ -38,6 +39,12 @@ const Dashboard = () => {
                     </li>
                     <li
                         className="cursor-pointer p-2 hover:bg-gray-700"
+                        onClick={() => { setSelectedSection('my_cars'); setIsSidebarOpen(false); }}
+                    >
+                        My Cars
+                    </li>
+                    <li
+                        className="cursor-pointer p-2 hover:bg-gray-700"
                         onClick={() => { setSelectedSection('users'); setIsSidebarOpen(false); }}
                     >
                         Users
@@ -55,6 +62,9 @@ const Dashboard = () => {
             <div className="flex-grow w-full md:w-3/4  p-4">
                 {selectedSection === 'addCar' && (
                     <AddCar />
+                )}
+                {selectedSection === 'my_cars' && (
+                    <MyCars />
                 )}
 
                 {selectedSection === 'users' && (

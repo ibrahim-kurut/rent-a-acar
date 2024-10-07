@@ -12,6 +12,17 @@ export const createNewCar = createAsyncThunk('cars/createNewCar', async (newCarD
     }
 });
 
+// get all cars
+export const getAllCars = createAsyncThunk('cars/getAllCars', async () => {
+    try {
+        const res = await axios.get('http://localhost:5000/cars');
+        return res.data;
+    } catch (error) {
+        console.error('Failed to get all cars:', error);
+        throw error;
+    }
+})
+
 const carSlice = createSlice({
     name: 'cars',
     initialState: {
@@ -35,7 +46,20 @@ const carSlice = createSlice({
             .addCase(createNewCar.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message;
-            });
+            })
+            // get all cars
+            .addCase(getAllCars.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getAllCars.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.cars = action.payload;
+            })
+            .addCase(getAllCars.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+
+            })
     }
 });
 
