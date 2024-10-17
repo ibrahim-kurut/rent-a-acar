@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCars, deleteCar } from '../../redux/Slices/carSlice'
 import { toast } from 'react-toastify'
 import swal from 'sweetalert';
+import UpdateCarModel from './UpdateCarModel';
 const MyCars = () => {
+    const [openUpdateModel, setOpenUpdateModel] = useState(false)
+    const [selectedCarId, setSelectedCarId] = useState(null);
     const dispatch = useDispatch()
     const { cars, error } = useSelector(state => state.cars)
 
@@ -48,6 +51,11 @@ const MyCars = () => {
         }
     };
 
+    // update car handel
+    const handleUpdate = async (id) => {
+        setOpenUpdateModel(true)
+        setSelectedCarId(id);
+    }
 
 
     return (
@@ -73,7 +81,9 @@ const MyCars = () => {
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.rent_per_day} $</td>
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.plate_number}</td>
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">
-                                    <button className="bg-green-600 text-white rounded capitalize px-2 py-1 mr-2 text-xs sm:text-sm w-full md:w-fit">Edit</button>
+                                    <button
+                                        onClick={() => handleUpdate(car.id)}
+                                        className="bg-green-600 text-white rounded capitalize px-2 py-1 mr-2 text-xs sm:text-sm w-full md:w-fit">Edit</button>
                                     <button
                                         onClick={() => handleDelete(car.id)}
                                         className="bg-red-600 text-white rounded capitalize px-2 py-1 text-xs sm:text-sm">Delete</button>
@@ -82,6 +92,16 @@ const MyCars = () => {
                         ))}
                     </tbody>
                 </table>
+                <div>
+                    {
+                        openUpdateModel &&
+                        <UpdateCarModel
+                            setOpenUpdateModel={setOpenUpdateModel}
+                            carId={selectedCarId}
+                            cars={cars} />
+                    }
+
+                </div>
             </div>
 
 
