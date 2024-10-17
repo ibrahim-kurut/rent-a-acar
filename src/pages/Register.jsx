@@ -11,7 +11,8 @@ const Register = () => {
     const navigate = useNavigate();
     const { status } = useSelector((state) => state.user);
 
-    const [userName, setUserName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -32,9 +33,13 @@ const Register = () => {
         e.preventDefault();
         const newErrors = {};
 
-        // Validation logic
-        if (userName.trim().length < 3) {
-            newErrors.userName = 'Username must be at least 3 characters long';
+        // Validation logic for first and last name
+        if (firstName.trim().length < 2) {
+            newErrors.firstName = 'First name must be at least 2 characters long';
+        }
+
+        if (lastName.trim().length < 2) {
+            newErrors.lastName = 'Last name must be at least 2 characters long';
         }
 
         if (!validateEmail(email)) {
@@ -52,7 +57,13 @@ const Register = () => {
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors); // Set validation errors
         } else {
-            const formData = { userName, email, password };
+            const formData = {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password,
+                re_password: confirmPassword
+            };
             // send data to server
             dispatch(register(formData))
                 .unwrap()
@@ -72,17 +83,30 @@ const Register = () => {
                 <h2 className="text-2xl font-bold text-center text-gray-900">Register</h2>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
-                            User Name
+                        <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                            First Name
                         </label>
                         <input
                             type="text"
-                            id="userName"
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
-                            className={`w-full px-3 py-2 mt-1 border ${errors.userName ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
+                            id="firstName"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            className={`w-full px-3 py-2 mt-1 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
                         />
-                        {errors.userName && <p className="text-red-500 text-sm">{errors.userName}</p>}
+                        {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+                    </div>
+                    <div>
+                        <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                            Last Name
+                        </label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            className={`w-full px-3 py-2 mt-1 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500`}
+                        />
+                        {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -131,9 +155,7 @@ const Register = () => {
                             className="w-full px-4 py-2 font-bold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             {status === 'loading' ?
-
-                                <LoaderSpinner />
-                                :
+                                <LoaderSpinner /> :
                                 "Register"
                             }
 
@@ -146,7 +168,6 @@ const Register = () => {
                         to="/login"> login now.</Link>
                 </p>
             </div>
-
         </div>
     );
 };

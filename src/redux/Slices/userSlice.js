@@ -4,7 +4,7 @@ import axios from 'axios';
 // Registration Process
 export const register = createAsyncThunk('user/register', async (userData, { rejectWithValue }) => {
     try {
-        const res = await axios.post('http://localhost:5000/users', userData)
+        const res = await axios.post('http://localhost:8000/rent_a_car/api/users/register/', userData)
         return res.data;
 
     } catch (error) {
