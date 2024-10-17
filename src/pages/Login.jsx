@@ -8,7 +8,7 @@ import LoaderSpinner from '../components/LoaderSpinner';
 
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
 
@@ -17,11 +17,12 @@ const Login = () => {
     const { status } = useSelector((state) => state.user);
 
 
+
     const handleSubmit = (e) => {
-        const formDatad = { email, password }
+        const formDatad = { username, password }
         e.preventDefault();
         // validation
-        if (email.trim() === '' || password.trim() === '') {
+        if (username.trim() === '' || password.trim() === '') {
             toast.error('Please fill in all fields');
         } else {
             // send data to server
@@ -43,14 +44,14 @@ const Login = () => {
                 <h2 className="text-2xl font-bold text-center text-gray-900">Login</h2>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                            Email address
+                        <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                            User Name
                         </label>
                         <input
-                            type="email"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>

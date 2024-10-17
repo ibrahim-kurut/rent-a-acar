@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 // Registration Process
 export const register = createAsyncThunk('user/register', async (userData, { rejectWithValue }) => {
     try {
@@ -17,27 +16,35 @@ export const register = createAsyncThunk('user/register', async (userData, { rej
 // Login process 
 export const login = createAsyncThunk('user/login', async (userData, { rejectWithValue }) => {
     try {
-        const { email, password } = userData
-        const res = await axios.get('http://localhost:5000/users')
-        const users = res.data
+        // Send user data to the API
+        const { username, password } = userData;
+        const res = await axios.post('http://localhost:8000/rent_a_car/api/users/login/', {
+            username,
+            password
+        });
 
-
-
-        // Find the user that matches the email and password
-        const user = users.find(user => user.email === email && user.password === password)
+        // Check the API response
+        const user = res.data;
 
         if (!user) {
-            throw new Error("Invalid email or password")
+            throw new Error("Invalid username or password");
         }
-        // Save userinfo to local Storage after login
+
+        // Save user data in Localstorage
         localStorage.setItem("userInfo", JSON.stringify(user));
 
-        return user
+        return user;
 
     } catch (error) {
-        return rejectWithValue(error.message);
+        // If the error contains a response from the server
+        if (error.response && error.response.data.detail) {
+            return rejectWithValue(error.response.data.detail);
+        } else {
+            return rejectWithValue(error.message);
+        }
     }
-})
+});
+
 
 //  initialize user
 const initialState = {
