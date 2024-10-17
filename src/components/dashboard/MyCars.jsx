@@ -68,10 +68,10 @@ const MyCars = () => {
                         {cars.map((car, i) => (
                             <tr key={car.id} className="border-b border-gray-300 hover:bg-gray-400">
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{i + 1}</td>
-                                <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.name}</td>
+                                <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.brand}</td>
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.model}</td>
-                                <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.price_per_day} $</td>
-                                <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.plate_no}</td>
+                                <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.rent_per_day} $</td>
+                                <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">{car.plate_number}</td>
                                 <td className="py-3 px-4 sm:px-6 text-left border border-gray-600">
                                     <button className="bg-green-600 text-white rounded capitalize px-2 py-1 mr-2 text-xs sm:text-sm w-full md:w-fit">Edit</button>
                                     <button

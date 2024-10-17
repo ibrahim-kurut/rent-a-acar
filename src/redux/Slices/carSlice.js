@@ -15,7 +15,9 @@ export const createNewCar = createAsyncThunk('cars/createNewCar', async (newCarD
 // get all cars
 export const getAllCars = createAsyncThunk('cars/getAllCars', async () => {
     try {
-        const res = await axios.get('http://localhost:5000/cars');
+        const res = await axios.get('http://127.0.0.1:8000/rent_a_car/api/cars/');
+        console.log(res.data);
+
         return res.data;
     } catch (error) {
         console.error('Failed to get all cars:', error);
