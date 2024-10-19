@@ -1,10 +1,10 @@
 import React from 'react'
 import CarItem from './CarItem'
 
-const CarsList = ({ data }) => {
+const CarsList = ({ cars }) => {
     return (
         <div className="">
-            <CarItem data={data} />
+            <CarItem cars={cars} />
         </div>
     )
 }
