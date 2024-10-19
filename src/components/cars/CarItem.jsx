@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 
 const CarItem = ({ cars }) => {
 
+    console.log(cars.length > 0);
+
     return (
         <div className="flex flex-wrap gap-3 mt-5 justify-center">
             {
-                cars.map((item) => {
+                cars.length > 0 && cars.map((item) => {
                     return (
                         <div key={item.id} className="card w-full sm:w-1/2 lg:w-1/4 bg-slate-600 p-3 rounded capitalize">
                             <div className="img h-[200px] md:h-[250px] lg:h-[250px]">
