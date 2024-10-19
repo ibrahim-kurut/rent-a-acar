@@ -16,11 +16,22 @@ export const createNewCar = createAsyncThunk('cars/createNewCar', async (newCarD
 export const getAllCars = createAsyncThunk('cars/getAllCars', async () => {
     try {
         const res = await axios.get('http://127.0.0.1:8000/rent_a_car/api/cars/');
-        console.log(res.data);
-
+        // console.log(res.data);
         return res.data;
     } catch (error) {
         console.error('Failed to get all cars:', error);
+        throw error;
+    }
+})
+
+// get car by id
+export const getCarById = createAsyncThunk('cars/getCarById', async (carId) => {
+    try {
+        const res = await axios.get(`http://127.0.0.1:8000/rent_a_car/api/cars/${carId}/`);
+        // console.log(res.data);
+        return res.data;
+    } catch (error) {
+        console.error('Failed to get car by id:', error);
         throw error;
     }
 })
@@ -72,6 +83,18 @@ const carSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message;
 
+            })
+            // get car
+            .addCase(getCarById.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getCarById.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.cars = action.payload;
+            })
+            .addCase(getCarById.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
             })
             // delete car
             .addCase(deleteCar.pending, (state) => {
