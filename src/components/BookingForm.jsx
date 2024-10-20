@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { createReservation } from '../redux/Slices/reserveSlice';
+import { useNavigate } from 'react-router-dom';
 
 function BookingForm({ cars }) {
     const { user } = useSelector(state => state.user);
@@ -9,6 +10,8 @@ function BookingForm({ cars }) {
 
     const { error } = useSelector(state => state.reservations);
     console.log(error?.start_date);
+
+    const navigate = useNavigate()
 
     // Initial form data, user and car info
     const [formData, setFormData] = useState({
@@ -87,6 +90,7 @@ function BookingForm({ cars }) {
                 end_date: formData.end_date,
             })).unwrap();
             toast.success("Reserved successfully");
+            navigate(`/rents/${formData.car.id}`)
         }
         catch (error) {
             toast.error(`${error?.start_date}`)

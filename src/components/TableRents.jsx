@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import UpdateDate from './UpdateDate';
 
-const TableRents = ({ car }) => {
+const TableRents = ({ userReservations }) => {
     const [openEdit, setOpenEdit] = useState('');
+
+    console.log(userReservations);
 
     // handel edit
     const handleEdit = (e) => {
@@ -26,16 +28,43 @@ const TableRents = ({ car }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="uppercase">
-                            <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">{car.plate_no}</td>
-                            <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">{car.name}</td>
-                            <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">?</td>
-                            <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">?</td>
-                            <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">{car.price_per_day}</td>
-                            <td
-                                onClick={handleEdit}
-                                className="py-2 px-2 md:px-4 text-center cursor-pointer border-b bg-yellow-300 text-sm md:text-base">edit</td>
-                        </tr>
+
+
+
+                        {
+                            userReservations.length > 0 ? (
+                                userReservations.map((item) => (
+                                    <tr className="uppercase" key={item.id}>
+                                        <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">
+                                            {item?.plate_number}
+                                        </td>
+                                        <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">
+                                            {item?.car_name}
+                                        </td>
+                                        <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">
+                                            {item?.start_date}
+                                        </td>
+                                        <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">
+                                            {item?.end_date}
+                                        </td>
+                                        <td className="py-2 px-2 md:px-4 border-b text-center text-sm md:text-base">
+                                            {item?.total_price} $
+                                        </td>
+                                        <td
+                                            onClick={() => handleEdit(item?.id)}
+                                            className="py-2 px-2 md:px-4 text-center cursor-pointer border-b bg-yellow-300 text-sm md:text-base">
+                                            Edit
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <p>
+                                    There are no reservations
+                                </p>
+                            )
+                        }
+
+
                     </tbody>
                 </table>
             </div>
